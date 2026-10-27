@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "mise-managed tools: strip the v prefix mise strips, group minor and patch bumps.",
+  "packageRules": [
+    {
+      "description": "mise strips the v prefix from github tags, but Renovate writes the raw tag back.",
+      "matchManagers": ["mise"],
+      "extractVersion": "^v?(?<version>.+)$"
+    },
+    {
+      "matchManagers": ["mise"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "mise tools"
+    }
+  ]
+}

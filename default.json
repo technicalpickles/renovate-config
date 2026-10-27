@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Base policy for technicalpickles repos: weekly, grouped, 7-day cooldown, no automerge.",
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "schedule": ["before 5am on monday"],
+  "minimumReleaseAge": "7 days",
+  "prConcurrentLimit": 3,
+  "packageRules": [
+    {
+      "description": "Majors wait for a tick on the Dependency Dashboard.",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm dependencies"
+    },
+    {
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "cargo dependencies"
+    },
+    {
+      "matchManagers": ["gomod"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "go dependencies"
+    },
+    {
+      "matchManagers": ["pep621", "uv"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "python dependencies"
+    },
+    {
+      "matchManagers": ["bundler"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "bundler dependencies"
+    },
+    {
+      "description": "Own tools ship when I ship them: no cooldown.",
+      "matchPackageNames": ["technicalpickles/*", "bktide", "sb"],
+      "minimumReleaseAge": null
+    }
+  ]
+}

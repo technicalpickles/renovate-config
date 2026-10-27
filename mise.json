@@ -3,8 +3,9 @@
   "description": "mise-managed tools: strip the v prefix mise strips, group minor and patch bumps.",
   "packageRules": [
     {
-      "description": "mise strips the v prefix from github tags, but Renovate writes the raw tag back.",
+      "description": "mise strips the v prefix from github tags, but Renovate writes the raw tag back. GitHub-backed tools only: applied to every mise tool it silently drops go updates.",
       "matchManagers": ["mise"],
+      "matchDepNames": ["github:**"],
       "extractVersion": "^v?(?<version>.+)$"
     },
     {
